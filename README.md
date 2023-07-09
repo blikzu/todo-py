@@ -21,3 +21,7 @@ The script operates using 5 commands:
 - ```complete <task-number>``` crosses out a completed task
 - ```clear``` clears all completed tasks and reorders list
 - ```clearall``` empties whole list
+
+Optionally:
+
+```-p / --path <path to file>``` can be used to define a path to a custom text file location (default is ~/.todo.txt)
