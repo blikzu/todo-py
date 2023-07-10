@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import sys
 import os
 import argparse
 
@@ -17,7 +16,7 @@ def addElement(path, x):
         number = len(lines)
         
         numberedLine = f"\n{number}. {x}"
-        file.write(numberedLine + "\u200B")
+        file.write(numberedLine + "\u200B") # adds 0 width space to stop strikethrough from missing last character
 
 
 def strike(text):
@@ -34,6 +33,7 @@ def completeElement(path, x):
     with open(path, "r") as file:
         lines = file.readlines()
     
+    # checks if line number is valid
     if x < 1 or x > len(lines):
         print("Invalid line number!")
         return
@@ -49,9 +49,9 @@ def resetLineNumbers(path):
 
     with open(path, "r") as file:
         lines = file.readlines()
-        output.append(lines[0]) # exclude first line
+        output.append(lines[0])
 
-        for i, line in enumerate(lines[1:], start=1):
+        for i, line in enumerate(lines[1:], start=1): # exlude 1st line
             withoutNumber = line.split(". ", 1)[-1]
             numbered = f"{i}. {withoutNumber}"
             output.append(numbered)
@@ -98,8 +98,7 @@ if __name__ == "__main__":
     
     if os.path.isfile(args.path) == False:
         print("todo.txt is missing creating new file")
-        with open(args.path, "w") as fileInit:
-            fileInit.write("TODO:")
+        clearAll(args.path)
     
 
     # Perform actions based on the command
